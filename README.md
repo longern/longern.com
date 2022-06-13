@@ -1,1 +1,2 @@
-# new-blog
+# longern.com
+Longern's blog
