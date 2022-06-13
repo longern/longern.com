@@ -1,6 +1,7 @@
 {
   "devDependencies": {
     "vuepress": "^2.0.0-beta.46",
+    "vuepress-plugin-hyblog": "*",
     "vuepress-plugin-sitemap2": "^2.0.0-beta.81"
   },
   "scripts": {
