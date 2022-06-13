@@ -20,7 +20,7 @@ export default defineUserConfig({
   plugins: [
     hyblogPlugin({ homepageSidebar }),
     sitemapPlugin({
-      hostname: "https://blog.longern.com",
+      hostname: "https://longern.com",
     }),
   ],
 
