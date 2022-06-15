@@ -1,20 +1,41 @@
-# Another hello world
+# 另一个hello world——记录我多年搭建博客的心路历程
 
-As my previous personal website will expire after my graduation, I have to move my blog to a permanent service provider. GitHub + Jekyll is a good choice for building a blog if dynamic pages are not necessary. All you have to do is clone a theme and then write Markdowns in GitHub editor. Code snippets will be automatically rendered. For example:
+## 简介
+
+博客相信大家都很熟悉，但是搭建博客又是怎样的过程呢？相信不少同学都很想了解搭建博客的方法，下面就让我带大家了解一下我多年搭建博客的过程以及各种搭建方案的对比吧！
+
+## WordPress
+
+2015年，距离高考还有2个月，正是压力倍增的时期。听说购物是缓解压力一个好办法，于是我花了一点钱把 [longern.com](https://longern.com) 这个域名买了下来（购物就是买这玩意？），并成功绑定了域名邮箱。用这个邮箱接收邮件那是相当有逼格，填各种资料都能让周围的人投来好奇的目光。这种与众不同让我感到当时的折腾是值得的。
+
+上大学之后，我通过某云的校园认证购买了当时仅需1块钱（现在貌似10块钱）一个月的基础服务器。购买之后我就开始思考我能拿这个近乎白送的服务器做什么。搭建一个个人博客似乎是一个展现个性理所应当的选择，于是我在上面搭建了一个 WordPress 博客，并且将我的域名绑定到了博客上。然而，在博客向公网开放后，评论区很快就被各种机器人发送的大量看不懂的外文广告塞满。而WordPress及其本身依赖的各种组件经常提醒你各种版本落后所带来的安全问题，它是如此贴心，贴心到让我心力憔悴。我的博客在很长一段时间陷入了停滞。
+
+## Jekyll
+
+随着毕业季的来临，我内心充满了对新生活的渴望，但随之而来的各种教育优惠的过期让我心在滴血，这其中就包括我的服务器。即使最低配的续约方案也让我小小的钱包望而却步，我被迫开始寻找其它博客方案。Jekyll是一个将 Markdown 转换为静态站点的的好方案，并且有很多主题（虽然我觉得都不咋地）。博客的内容也能永久保存，不用像 WordPress 那样随时担心内容丢失，除非 GitHub 倒台（要是 GitHub 都倒了，那别做程序员了，赶紧找个厂上班吧）。静态站点能通过 GitHub Pages 永久免费托管，也能绑定自定义域名。并且作为程序员最关心的渲染代码片段的功能也是支持的，例如：
 
 ```python
-temp = x
-x = y
-y = temp
+def func(n):
+    if n <= 2:
+        return 1
+    return func(n - 1) + func(n - 2)
 ```
 
-Rendering formulas such as $e^{i\pi}+1=0$ is supported.
+注意渲染像 $e^{i\pi}+1=0$ 这样的公式 Jekyll 没有内置的支持，需要配置 MathJax 等其它库才能使用，这样才能更好地展示写得很认真但也没能提升绩点的高数作业。
 
-Dynamic content is the main reason why I moved from Jekyll to Vuepress 2.
-<div>Count: {{ count }}</div>
-<div>
-  <button @click="count++">Add</button>
-</div>
+## VuePress 2
+
+纯粹写静态的文本还是不够 fancy，于是我尝试在其中加入 HTML 和 JavaScript 等复杂的交互式内容。使用如此原始的方法虽然确实能达到目的，但对于了解现代 Web 技术几乎毫无帮助，而且过程充满了受虐般的痛苦。GitHub 被财大气粗的微软爸爸收购使得 GitHub Actions 免费开放，CloudFlare 推出的 Pages 静态页面自动构建也完全免费，探索其它免费博客方案成为可能。VuePress 2 就是其中一个，对 Markdown 的支持让我能直接无缝迁移旧的博客，基于 Vue 3 的组件化渲染支持在 Markdown 直接插入 Vue 组件。制作交互变得非常方便，例如：
+
+<div>你点击了这个<button @click="count++">按钮</button><span v-text="count"></span>次</div>
+
+这让我的博客可以更有特色，能存放我平常用到的一些有趣的前端小工具。
+
+但 VuePress 2 制作一个博客还是有一点小小的门槛，为此我制作了一个小插件：[vuepress-plugin-hyblog](https://www.npmjs.com/package/vuepress-plugin-hyblog)来帮助你快速将一个 GitHub Jekyll 博客迁移到 VuePress。
+
+## 结论
+
+对于基本的博客需求，我还是很推荐使用 GitHub Pages，它配置简单，无需维护，永不丢失。如果你有展示前端交互的需求，那么 VuePress 2 是你更好的选择。
 
 <script setup lang="ts">
 import { ref } from "vue";
